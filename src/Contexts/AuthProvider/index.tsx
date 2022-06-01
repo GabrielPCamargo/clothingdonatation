@@ -1,7 +1,5 @@
 import React, { createContext, useEffect, useState } from 'react';
-import { Navigate } from 'react-router-dom';
 import { AuthContextType, UserType } from './types';
-import { useAuth } from './useAuth';
 import { getUserLocalStorage, setUserLocalStorage } from './utils';
 
 export const AuthContext = createContext<AuthContextType>(
