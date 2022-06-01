@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { Index } from './pages/Index';
 import { Map } from './pages/Map';
 import { Login } from './pages/Login';
-import { useAuth } from './Contexts/AuthProvider';
+import { RequireAuth } from './Contexts/AuthProvider/RequireAuth';
 
 export function AppRoutes() {
   return (
@@ -20,14 +20,4 @@ export function AppRoutes() {
       />
     </Routes>
   );
-}
-
-function RequireAuth({ children }: { children: JSX.Element }) {
-  const auth = useAuth();
-
-  if (!auth.user) {
-    return <Navigate to="/login" />;
-  }
-
-  return children;
 }
