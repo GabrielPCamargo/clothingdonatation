@@ -1,7 +1,7 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { Index } from './pages/Index';
-import { Map } from './pages/Map';
+import { MapPage } from './pages/MapPage';
 import { Login } from './pages/Login';
 import { RequireAuth } from './Contexts/AuthProvider/RequireAuth';
 import { Register } from './pages/Register';
@@ -16,7 +16,7 @@ export function AppRoutes() {
         path="/map"
         element={
           <RequireAuth>
-            <Map />
+            <MapPage />
           </RequireAuth>
         }
       />

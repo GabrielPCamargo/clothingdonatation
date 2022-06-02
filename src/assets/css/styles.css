@@ -11,3 +11,17 @@ body {
 * {
   margin: 0;
 }
+
+.gm-ui-hover-effect {
+  color: #fff !important;
+}
+
+.gm-style-iw {
+  background: #001753 !important;
+  top: 3.80rem !important;
+}
+
+.gm-style-iw-t::after {
+  background: #001753 !important;
+  display: none !important;
+}
