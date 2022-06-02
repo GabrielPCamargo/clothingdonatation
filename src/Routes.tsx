@@ -5,6 +5,7 @@ import { MapPage } from './pages/MapPage';
 import { Login } from './pages/Login';
 import { RequireAuth } from './Contexts/AuthProvider/RequireAuth';
 import { Register } from './pages/Register';
+import { MapRegister } from './pages/MapRegister';
 
 export function AppRoutes() {
   return (
@@ -17,6 +18,14 @@ export function AppRoutes() {
         element={
           <RequireAuth>
             <MapPage />
+          </RequireAuth>
+        }
+      />
+      <Route
+        path="/map/register"
+        element={
+          <RequireAuth>
+            <MapRegister />
           </RequireAuth>
         }
       />

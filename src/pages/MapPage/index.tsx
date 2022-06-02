@@ -2,6 +2,7 @@ import React from 'react';
 import clothes from '../../assets/img/clothes.png';
 import { Container } from './styled';
 import { Map } from '../../components/Map';
+import { Link } from 'react-router-dom';
 
 export function MapPage() {
   return (
@@ -23,7 +24,9 @@ export function MapPage() {
         <section>
           <h4>Econtre uma instituição ou uma solicitação de roupas</h4>
 
-          <button type="button">Nova instituição</button>
+          <button type="button">
+            <Link to="/map/register">Nova instituição</Link>
+          </button>
           <button type="button">Nova solicitação</button>
         </section>
       </aside>
