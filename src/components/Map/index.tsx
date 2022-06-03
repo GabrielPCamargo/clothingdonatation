@@ -5,7 +5,7 @@ import personMarker from '../../assets/icons/personMarker.svg';
 export function Map() {
   useEffect(() => {
     const loader = new Loader({
-      apiKey: 'AIzaSyBRbM0gH6wfdwejtkmapTKmbLY3KleGFFU',
+      apiKey: process.env.REACT_APP_API_KEY || '',
       version: 'weekly',
     });
 
