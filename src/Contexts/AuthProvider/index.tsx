@@ -1,6 +1,9 @@
 import React, { createContext, useEffect, useState } from 'react';
-import { AuthContextType, UserType } from './types';
+import { AuthContextType, IUser, UserType } from './types';
 import { getUserLocalStorage, setUserLocalStorage } from './utils';
+import { AxiosError } from 'axios';
+import axios from '../../services/axios';
+import { toast } from 'react-toastify';
 
 export const AuthContext = createContext<AuthContextType>(
   {} as AuthContextType
@@ -31,11 +34,23 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     return false;
   };
 
-  const signin = (userProps: UserType) => {
+  const signin = async (userProps: IUser) => {
     //login api
-    console.log('signin');
-    setUser(userProps);
-    setUserLocalStorage(userProps);
+    try {
+      console.log(userProps);
+      const user = (
+        await axios.post('/login', {
+          email: userProps.email,
+          password: userProps.password,
+        })
+      ).data as UserType;
+      setUser(user);
+      setUserLocalStorage(user);
+      toast.success('Logado com sucesso!');
+    } catch (err: any) {
+      console.log(err.response.data);
+      toast.error(err.response.data);
+    }
   };
 
   const signout = () => {

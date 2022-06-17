@@ -1,4 +1,5 @@
 import React from 'react';
+import { useAuth } from '../../Contexts/AuthProvider/useAuth';
 import { Link } from 'react-router-dom';
 import '../../assets/css/styles.css';
 import clothes from '../../assets/img/clothes.png';
@@ -6,6 +7,12 @@ import map from '../../assets/img/map.png';
 import { Container, IndexSection } from './styled';
 
 export function Index() {
+  const { user, signout } = useAuth();
+
+  const onHandleLogout = () => {
+    signout();
+  };
+
   return (
     <Container>
       <div className="container">
@@ -29,12 +36,21 @@ export function Index() {
               <li>
                 <Link to="/map">Volutarios</Link>
               </li>
-              <li>
-                <Link to="/login">Login</Link>
-              </li>
-              <li>
-                <Link to="/register">Registrar-se</Link>
-              </li>
+              {!user ? (
+                <>
+                  <li>
+                    {' '}
+                    <Link to="/login">Login</Link>
+                  </li>
+                  <li>
+                    <Link to="/register">Registrar-se</Link>
+                  </li>
+                </>
+              ) : (
+                <li>
+                  <a onClick={onHandleLogout}>Sair</a>
+                </li>
+              )}
             </ul>
           </nav>
         </header>
