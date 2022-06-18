@@ -3,6 +3,7 @@ import clothes from '../../assets/img/clothes.png';
 import { Container } from './styled';
 import { Map } from '../../components/Map';
 import { Link } from 'react-router-dom';
+import { TitleBox } from '../../components/TitleBox';
 
 export function MapPage() {
   return (
@@ -10,16 +11,7 @@ export function MapPage() {
       <Map />
       <aside>
         <header>
-          <div className="titlebox">
-            <img src={clothes} alt="" />
-            <div>
-              <h1>
-                Clothing
-                <br />
-                Donation
-              </h1>
-            </div>
-          </div>
+          <TitleBox justifyContent="center" />
         </header>
         <section>
           <h4>Econtre uma instituição ou uma solicitação de roupas</h4>

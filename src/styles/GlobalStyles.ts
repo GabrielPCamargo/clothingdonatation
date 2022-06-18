@@ -16,6 +16,7 @@ export default createGlobalStyle`
     margin: 0;
   }
 
+  /* Google Maps Styling */
   .gm-ui-hover-effect {
     color: #fff !important;
   }

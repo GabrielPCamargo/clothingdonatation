@@ -3,33 +3,24 @@ import clothes from '../../assets/img/clothes.png';
 import { Container, Form } from './styled';
 import { useAuth } from '../../Contexts/AuthProvider/useAuth';
 import { useNavigate } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import { TitleBox } from '../../components/TitleBox';
 
-export function Login() {
-  const { signin, user } = useAuth();
+export function Login({ prevPath }: { prevPath?: string }) {
+  const { signIn } = useAuth();
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const navigate = useNavigate();
 
   const handleFormSubmit = function (e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    signin({ email, password });
-    navigate(-1);
+    signIn({ email, password });
+    navigate('/map', { replace: true });
   };
 
   return (
     <Container>
       <header>
-        <div className="titlebox">
-          <img src={clothes} alt="" onClick={() => navigate('/')} />
-          <div>
-            <h1 onClick={() => navigate('/')}>
-              Clothing
-              <br />
-              Donation
-            </h1>
-          </div>
-        </div>
+        <TitleBox justifyContent="center" />
       </header>
 
       <section>

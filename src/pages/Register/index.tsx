@@ -1,21 +1,13 @@
 import React from 'react';
 import clothes from '../../assets/img/clothes.png';
+import { TitleBox } from '../../components/TitleBox';
 import { Container, Form } from './styled';
 
 export function Register() {
   return (
     <Container>
       <header>
-        <div className="titlebox">
-          <img src={clothes} alt="" />
-          <div>
-            <h1>
-              Clothing
-              <br />
-              Donation
-            </h1>
-          </div>
-        </div>
+        <TitleBox justifyContent="center" />
       </header>
 
       <section>

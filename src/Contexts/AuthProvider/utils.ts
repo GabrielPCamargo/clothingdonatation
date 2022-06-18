@@ -1,10 +1,10 @@
-import { UserType } from './types';
+import { IUser } from './types';
 
-export function setUserLocalStorage(user: UserType | null) {
+export function setUserLocalStorage(user: IUser | null) {
   localStorage.setItem('U', JSON.stringify(user));
 }
 
-export function getUserLocalStorage() {
+export function getUserLocalStorage(): IUser | null {
   const response = localStorage.getItem('U');
 
   if (!response) {

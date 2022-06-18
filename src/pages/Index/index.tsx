@@ -2,57 +2,18 @@ import React from 'react';
 import { useAuth } from '../../Contexts/AuthProvider/useAuth';
 import { Link } from 'react-router-dom';
 import '../../assets/css/styles.css';
-import clothes from '../../assets/img/clothes.png';
 import map from '../../assets/img/map.png';
 import { Container, IndexSection } from './styled';
+import { TitleBox } from '../../components/TitleBox';
+import { Nav } from '../../components/Nav';
 
 export function Index() {
-  const { user, signout } = useAuth();
-
-  const onHandleLogout = () => {
-    signout();
-  };
-
   return (
     <Container>
       <div className="container">
         <header>
-          <div className="titlebox">
-            <img src={clothes} alt="" />
-            <div>
-              <h1>
-                Clothing
-                <br />
-                Donation
-              </h1>
-            </div>
-          </div>
-
-          <nav>
-            <ul>
-              <li>
-                <Link to="/map">Instituições</Link>
-              </li>
-              <li>
-                <Link to="/map">Volutarios</Link>
-              </li>
-              {!user ? (
-                <>
-                  <li>
-                    {' '}
-                    <Link to="/login">Login</Link>
-                  </li>
-                  <li>
-                    <Link to="/register">Registrar-se</Link>
-                  </li>
-                </>
-              ) : (
-                <li>
-                  <a onClick={onHandleLogout}>Sair</a>
-                </li>
-              )}
-            </ul>
-          </nav>
+          <TitleBox imageHeight="75%" />
+          <Nav />
         </header>
         <IndexSection>
           <div className="info">

@@ -8,7 +8,12 @@ export function RequireAuth({ children }: { children: JSX.Element }) {
   const authLS = getUserLocalStorage();
 
   if (!auth.user && !authLS) {
-    return <Navigate to="/login" />;
+    return (
+      <Navigate
+        to="/login"
+        state={{ state: { prevPath: window.location.pathname } }}
+      />
+    );
   }
 
   return children;

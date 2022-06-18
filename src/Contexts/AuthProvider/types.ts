@@ -1,18 +1,18 @@
 export interface AuthContextType {
-  user: UserType | null;
-  signin: (userProps: IUser) => void;
-  signout: () => void;
+  user: IUser | null;
+  signIn: (userProps: IUserLogin) => Promise<void>;
+  logOut: () => void;
   isLoggedIn: () => boolean;
 }
 
-export interface UserType {
+export interface IUser {
   name: string;
   email: string;
   token: string;
   type: string;
 }
 
-export interface IUser {
+export interface IUserLogin {
   email: string;
   password: string;
 }

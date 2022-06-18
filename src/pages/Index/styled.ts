@@ -12,50 +12,6 @@ export const Container = styled.div`
     display: flex;
     justify-content: space-between;
     max-height: 15vh;
-
-    .titlebox {
-      display: flex;
-      align-items: center;
-      flex: 1;
-    }
-
-    .titlebox h1 {
-      margin: auto 0;
-      margin-left: 2.5rem;
-      font-family: 'Inter';
-      font-style: normal;
-      font-weight: 600;
-      font-size: 36px;
-      line-height: 100%;
-    }
-
-    .titlebox img {
-      height: 75%;
-    }
-
-    nav ul {
-      flex: 1;
-      list-style: none;
-      display: flex;
-      align-items: center;
-      margin: 0;
-      padding: 0;
-
-      & li {
-        display: block;
-        margin: 2rem;
-      }
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-      transition: all 0.5s;
-    }
-
-    a:hover {
-      color: #999;
-    }
   }
 `;
 

@@ -20,27 +20,6 @@ export const Container = styled.div`
       justify-content: center;
       max-height: 10vh;
       padding-top: 4rem;
-
-      .titlebox {
-        display: flex;
-        width: 100%;
-        justify-content: center;
-        align-items: center;
-      }
-
-      .titlebox h1 {
-        margin: auto 0;
-        margin-left: 2.5rem;
-        font-family: 'Inter';
-        font-style: normal;
-        font-weight: 600;
-        font-size: 36px;
-        line-height: 100%;
-      }
-
-      .titlebox img {
-        height: 100%;
-      }
     }
 
     h4 {
