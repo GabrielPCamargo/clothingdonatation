@@ -1,19 +1,17 @@
 import React from 'react';
 import { useAuth } from './useAuth';
-import { Navigate } from 'react-router-dom';
-import { getUserLocalStorage } from './utils';
+import { Navigate, useLocation } from 'react-router-dom';
+import { Loading } from '../../components/Loading';
 
 export function RequireAuth({ children }: { children: JSX.Element }) {
-  const auth = useAuth();
-  const authLS = getUserLocalStorage();
+  const { user, loading } = useAuth();
+  const location = useLocation();
 
-  if (!auth.user && !authLS) {
-    return (
-      <Navigate
-        to="/login"
-        state={{ state: { prevPath: window.location.pathname } }}
-      />
-    );
+  if (!user) {
+    if (loading) {
+      return <Loading />;
+    }
+    return <Navigate to="/login" state={{ from: location }} replace />;
   }
 
   return children;

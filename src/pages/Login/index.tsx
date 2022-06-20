@@ -1,20 +1,35 @@
-import React, { useState } from 'react';
-import clothes from '../../assets/img/clothes.png';
+import React, { useEffect, useState } from 'react';
 import { Container, Form } from './styled';
 import { useAuth } from '../../Contexts/AuthProvider/useAuth';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { TitleBox } from '../../components/TitleBox';
 
-export function Login({ prevPath }: { prevPath?: string }) {
-  const { signIn } = useAuth();
+interface Location {
+  state: {
+    from: {
+      pathname: string;
+    };
+  } | null;
+}
+
+export function Login() {
+  const { signIn, user } = useAuth();
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const navigate = useNavigate();
+  const location = useLocation() as Location;
+
+  const from = location.state?.from?.pathname || '/';
+
+  useEffect(() => {
+    if (user) {
+      navigate('/map');
+    }
+  });
 
   const handleFormSubmit = function (e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    signIn({ email, password });
-    navigate('/map', { replace: true });
+    signIn({ email, password }, () => navigate(from));
   };
 
   return (

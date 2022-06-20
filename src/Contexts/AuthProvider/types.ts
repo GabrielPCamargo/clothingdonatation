@@ -1,7 +1,8 @@
 export interface AuthContextType {
   user: IUser | null;
-  signIn: (userProps: IUserLogin) => Promise<void>;
-  logOut: () => void;
+  loading: boolean;
+  signIn: (userProps: IUserLogin, callback: VoidFunction) => Promise<void>;
+  logOut: (callback: VoidFunction) => void;
   isLoggedIn: () => boolean;
 }
 

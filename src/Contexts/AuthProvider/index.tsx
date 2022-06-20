@@ -10,6 +10,7 @@ export const AuthContext = createContext<AuthContextType>(
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<IUser | null>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const userLS = getUserLocalStorage();
@@ -17,6 +18,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     if (userLS) {
       setUser(userLS);
     }
+
+    setLoading(false);
   }, []);
 
   const isLoggedIn = () => {
@@ -32,7 +35,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     return false;
   };
 
-  const signIn = async (userProps: IUserLogin) => {
+  const signIn = async (userProps: IUserLogin, callback: VoidFunction) => {
     //login api
     try {
       const user = (
@@ -45,17 +48,19 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       setUser(user);
       setUserLocalStorage(user);
       toast.success('Logado com sucesso!');
+      callback();
     } catch (err: any) {
       console.log(err.response.data);
     }
   };
 
-  const logOut = () => {
+  const logOut = (callback: VoidFunction) => {
     setUser(null);
     setUserLocalStorage(null);
+    callback();
   };
 
-  const value = { user, signIn, logOut, isLoggedIn };
+  const value = { user, signIn, logOut, isLoggedIn, loading };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }

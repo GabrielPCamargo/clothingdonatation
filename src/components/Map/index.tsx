@@ -138,5 +138,5 @@ export function Map() {
     });
   }, []);
 
-  return <div id="map">Mapa</div>;
+  return <div id="map"></div>;
 }

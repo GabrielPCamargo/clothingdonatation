@@ -1,10 +1,11 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../Contexts/AuthProvider/useAuth';
 import { Container } from './styled';
 
 export function Nav() {
   const { user, logOut } = useAuth();
+  const navigate = useNavigate();
 
   return (
     <Container>
@@ -27,7 +28,7 @@ export function Nav() {
           </>
         ) : (
           <li>
-            <a onClick={() => logOut()}>Sair</a>
+            <a onClick={() => logOut(() => navigate('/'))}>Sair</a>
           </li>
         )}
       </ul>
