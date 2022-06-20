@@ -50,7 +50,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       toast.success('Logado com sucesso!');
       callback();
     } catch (err: any) {
-      console.log(err.response.data);
+      if (err.response.status === 401) {
+        toast.error('E-mail ou senha inválido(s)');
+      }
     }
   };
 

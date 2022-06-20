@@ -3,6 +3,8 @@ import { Container, Form } from './styled';
 import { useAuth } from '../../Contexts/AuthProvider/useAuth';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { TitleBox } from '../../components/TitleBox';
+import isEmail from 'validator/lib/isEmail';
+import { toast } from 'react-toastify';
 
 interface Location {
   state: {
@@ -23,13 +25,17 @@ export function Login() {
 
   useEffect(() => {
     if (user) {
-      navigate('/map');
+      navigate('/map', { replace: true });
     }
   });
 
   const handleFormSubmit = function (e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    signIn({ email, password }, () => navigate(from));
+    if (!isEmail(email) || password.length < 8 || password.length > 32) {
+      toast.error('E-mail ou senha inválidos');
+      return;
+    }
+    signIn({ email, password }, () => navigate(from, { replace: true }));
   };
 
   return (
@@ -48,6 +54,7 @@ export function Login() {
               name="email"
               placeholder="example@gmail.com"
               value={email}
+              required
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                 setEmail(e.target.value)
               }
@@ -60,6 +67,7 @@ export function Login() {
               type="password"
               name="password"
               value={password}
+              required
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                 setPassword(e.target.value)
               }

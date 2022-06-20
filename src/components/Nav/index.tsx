@@ -14,7 +14,7 @@ export function Nav() {
           <Link to="/map">Instituições</Link>
         </li>
         <li>
-          <Link to="/map">Volutarios</Link>
+          <Link to="/map">Voluntários</Link>
         </li>
         {!user ? (
           <>
@@ -28,7 +28,9 @@ export function Nav() {
           </>
         ) : (
           <li>
-            <a onClick={() => logOut(() => navigate('/'))}>Sair</a>
+            <a onClick={() => logOut(() => navigate('/', { replace: true }))}>
+              Sair
+            </a>
           </li>
         )}
       </ul>

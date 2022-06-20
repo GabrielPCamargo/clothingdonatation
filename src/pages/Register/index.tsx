@@ -1,9 +1,19 @@
-import React from 'react';
-import clothes from '../../assets/img/clothes.png';
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { TitleBox } from '../../components/TitleBox';
+import { useAuth } from '../../Contexts/AuthProvider/useAuth';
 import { Container, Form } from './styled';
 
 export function Register() {
+  const navigate = useNavigate();
+  const { user } = useAuth();
+
+  useEffect(() => {
+    if (user) {
+      navigate('/map', { replace: true });
+    }
+  });
+
   return (
     <Container>
       <header>
