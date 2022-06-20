@@ -41,10 +41,25 @@ export const Form = styled.form`
     }
   }
 
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  textarea:-webkit-autofill,
+  textarea:-webkit-autofill:hover,
+  textarea:-webkit-autofill:focus,
+  select:-webkit-autofill,
+  select:-webkit-autofill:hover,
+  select:-webkit-autofill:focus {
+    border: 1px solid green;
+    -webkit-text-fill-color: #fff;
+    -webkit-box-shadow: 0 0 0 30px #445275 inset !important;
+  }
+
   input,
+  input:-webkit-autofill,
   select {
     margin-top: 0.25rem;
-    background: #445275;
+    background: #445275 !important;
     border: 1px solid #1656fd;
     border-radius: 6px;
     padding: 0.5rem;
