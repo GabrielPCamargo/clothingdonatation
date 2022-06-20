@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import clothes from '../../assets/img/clothes.png';
 import { Container } from './styled';
 
@@ -13,13 +14,20 @@ export function TitleBox({
 }: Props) {
   return (
     <Container justifyContent={justifyContent} imageHeight={imageHeight}>
-      <img src={clothes} alt="" />
-      <div>
-        <h1>
-          Clothing
-          <br />
-          Donation
-        </h1>
+      <div className="link">
+        <Link to="/">
+          <img src={clothes} alt="" />
+        </Link>
+
+        <Link to="/">
+          <div>
+            <h1>
+              Clothing
+              <br />
+              Donation
+            </h1>
+          </div>
+        </Link>
       </div>
     </Container>
   );
