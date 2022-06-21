@@ -1,20 +1,22 @@
-import React, { useEffect } from 'react';
-import { Loader } from '@googlemaps/js-api-loader';
+import React, { useEffect, useState } from 'react';
+import { MapContainer } from './styled';
 import personMarker from '../../assets/icons/personMarker.svg';
 
-export function Map() {
-  useEffect(() => {
-    const loader = new Loader({
-      apiKey: process.env.REACT_APP_API_KEY || '',
-      version: 'weekly',
-    });
+interface MapProps extends google.maps.MapOptions {
+  onClick?: (e: google.maps.MapMouseEvent) => void;
+  children?: JSX.Element[];
+}
 
-    loader.load().then(() => {
-      const map = new google.maps.Map(
-        document.getElementById('map') as HTMLElement,
-        {
-          center: { lat: -30.105931, lng: -51.328167 },
+export function Map({ onClick, children }: MapProps) {
+  const ref = React.useRef<HTMLDivElement>(null);
+  const [map, setMap] = React.useState<google.maps.Map>();
+
+  useEffect(() => {
+    if (ref.current && !map) {
+      setMap(
+        new window.google.maps.Map(ref.current, {
           zoom: 14,
+          center: new google.maps.LatLng({ lat: -30.105931, lng: -51.328167 }),
           styles: [
             { elementType: 'geometry', stylers: [{ color: '#242f3e' }] },
             {
@@ -101,42 +103,27 @@ export function Map() {
               stylers: [{ color: '#17263c' }],
             },
           ],
-        }
+        })
       );
+    }
+  }, [ref, map]);
 
-      map.addListener('click', (e: google.maps.MapMouseEvent) => {
-        console.log(e.latLng?.toJSON());
-      });
+  useEffect(() => {
+    if (map) {
+      if (onClick) {
+        map.addListener('click', onClick);
+      }
+    }
+  }, [map, onClick]);
 
-      const marker = new google.maps.Marker({
-        position: {
-          lat: -30.10683686993549,
-          lng: -51.329162639129535,
-        },
-        map,
-        icon: personMarker,
-        title: 'test',
-      });
-
-      const contentString =
-        '<div class="info">' +
-        '<span>Centro de doações</span>' +
-        '<button type="button">Detalhes</button>' +
-        '</div>';
-
-      const infowindow = new google.maps.InfoWindow({
-        content: contentString,
-      });
-
-      marker.addListener('click', () => {
-        infowindow.open({
-          anchor: marker,
-          map,
-          shouldFocus: false,
-        });
-      });
-    });
-  }, []);
-
-  return <div id="map"></div>;
+  return (
+    <MapContainer ref={ref} className="map">
+      {React.Children.map(children, (child) => {
+        if (React.isValidElement(child)) {
+          // set the map prop on the child component
+          return React.cloneElement(child, { map });
+        }
+      })}
+    </MapContainer>
+  );
 }

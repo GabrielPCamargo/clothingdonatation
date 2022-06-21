@@ -1,9 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import clothes from '../../assets/img/clothes.png';
 import { Container, Form } from './styled';
 import { Map } from '../../components/Map';
 
+interface ICoordinates {
+  lat: number;
+  lng: number;
+}
+
 export function MapRegister() {
+  const [type, setType] = useState('institution');
+  const [name, setName] = useState('');
+  const [description, setDescription] = useState('');
+  const [phone, setPhone] = useState('');
+  const [coordinates, setCoordinates] = useState<ICoordinates>(
+    {} as ICoordinates
+  );
+
   return (
     <Container>
       <Map />
