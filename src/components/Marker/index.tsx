@@ -20,13 +20,11 @@ export function Marker(props: google.maps.MarkerOptions & MarkerProps) {
 
   return (
     <>
-      {props.children &&
-        marker &&
-        React.Children.map(props.children, (child) => {
-          if (React.isValidElement(child)) {
-            return React.cloneElement<InfoWindow>(child, { map, marker });
-          }
-        })}
+      {React.Children.map(props.children, (child) => {
+        if (React.isValidElement(child)) {
+          return React.cloneElement<InfoWindow>(child, { map, marker });
+        }
+      })}
     </>
   );
 }
