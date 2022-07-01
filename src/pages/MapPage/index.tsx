@@ -1,40 +1,33 @@
 import React from 'react';
 import { Container } from './styled';
 import { Map } from '../../components/Map';
-import { Wrapper, Status } from '@googlemaps/react-wrapper';
+import personMarker from '../../assets/icons/personMarker.svg';
 import { Link } from 'react-router-dom';
 import { TitleBox } from '../../components/TitleBox';
-import dotenv from 'dotenv';
 import { Marker } from '../../components/Marker';
-
-const render = (status: Status) => {
-  switch (status) {
-    case Status.LOADING:
-      return <h1>Loading</h1>;
-    case Status.FAILURE:
-      return <h1>Failure</h1>;
-    case Status.SUCCESS:
-      return <h1>Success</h1>;
-  }
-};
+import { InfoWindow } from '../../components/InfoWindow';
 
 export function MapPage() {
-  const handleOnClick = (e: google.maps.MapMouseEvent) => {
-    console.log(e.latLng?.toJSON());
-  };
-
   return (
     <Container>
-      <Wrapper apiKey={process.env.REACT_APP_API_KEY || ''} render={render}>
-        <Map onClick={handleOnClick}>
-          <Marker
-            position={{ lat: -30.09733223303355, lng: -51.312168162811176 }}
-          />
-          <Marker
-            position={{ lat: -30.118419410174702, lng: -51.35079197262563 }}
-          />
-        </Map>
-      </Wrapper>
+      <Map>
+        <Marker
+          icon={personMarker}
+          position={{ lat: -30.09733223303355, lng: -51.312168162811176 }}
+        >
+          <InfoWindow>
+            <h1>Testefdasfafakjflakfjlakjfalk</h1>
+          </InfoWindow>
+        </Marker>
+        <Marker
+          icon={personMarker}
+          position={{ lat: -30.118419410174702, lng: -51.35079197262563 }}
+        >
+          <InfoWindow>
+            <h3>Meu teste 123</h3>
+          </InfoWindow>
+        </Marker>
+      </Map>
       <aside>
         <header>
           <TitleBox justifyContent="center" />
