@@ -17,9 +17,10 @@ export function InfoWindow({ children, map, marker }: InfoWindow) {
         content: renderToString(children),
       })
     );
+  }, [map, marker]);
 
-    if (!infoWindow) return;
-
+  useEffect(() => {
+    if (!infoWindow || !marker || !map) return;
     marker.addListener('click', () => {
       infoWindow.open({
         anchor: marker,
@@ -27,6 +28,6 @@ export function InfoWindow({ children, map, marker }: InfoWindow) {
         shouldFocus: false,
       });
     });
-  }, [map, marker]);
+  }, [infoWindow, marker, map]);
   return <></>;
 }
