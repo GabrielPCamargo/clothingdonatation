@@ -1,13 +1,38 @@
 import React, { createContext, useEffect, useState } from 'react';
 import { MapContextType } from './types';
 import { Loader } from '@googlemaps/js-api-loader';
+import { toast } from 'react-toastify';
 
 export const MapContext = createContext<MapContextType>({} as MapContextType);
 
 export function MapProvider({ children }: { children: React.ReactNode }) {
   const [map, setMap] = useState<google.maps.Map>();
+  const [position, setPosition] = useState<google.maps.LatLngLiteral>();
 
   useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (userPosition) => {
+          setPosition({
+            lat: userPosition.coords.latitude,
+            lng: userPosition.coords.longitude,
+          });
+        },
+        () => {
+          toast.error(
+            'Para melhor funcionamento a localização deve ser acionada',
+            {
+              toastId: 'geolocationError',
+            }
+          );
+          setPosition({ lat: -30.105931, lng: -51.328167 });
+        }
+      );
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!position) return;
     const loader = new Loader({
       apiKey: process.env.REACT_APP_API_KEY || '',
       version: 'weekly',
@@ -17,8 +42,9 @@ export function MapProvider({ children }: { children: React.ReactNode }) {
       loader.load().then(() => {
         setMap(
           new google.maps.Map(document.getElementById('map') as HTMLElement, {
-            center: { lat: -30.105931, lng: -51.328167 },
-            zoom: 14,
+            center: position,
+            zoom: 17,
+            clickableIcons: false,
             styles: [
               { elementType: 'geometry', stylers: [{ color: '#242f3e' }] },
               {
@@ -109,7 +135,7 @@ export function MapProvider({ children }: { children: React.ReactNode }) {
         );
       });
     }
-  }, []);
+  }, [position]);
 
   const value = { map };
 

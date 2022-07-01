@@ -18,6 +18,12 @@ export function Marker(props: google.maps.MarkerOptions & MarkerProps) {
     setMarker(new google.maps.Marker({ ...props, map }));
   }, [map]);
 
+  useEffect(() => {
+    marker?.setPosition(props.position);
+  }, [props.position]);
+
+  if (!props.children) return <></>;
+
   return (
     <>
       {React.Children.map(props.children, (child) => {

@@ -2,24 +2,28 @@ import React, { useState } from 'react';
 import clothes from '../../assets/img/clothes.png';
 import { Container, Form } from './styled';
 import { Map } from '../../components/Map';
-
-interface ICoordinates {
-  lat: number;
-  lng: number;
-}
+import { Marker } from '../../components/Marker';
+import { MapProvider } from '../../Contexts/MapProvider';
 
 export function MapRegister() {
   const [type, setType] = useState('institution');
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [phone, setPhone] = useState('');
-  const [coordinates, setCoordinates] = useState<ICoordinates>(
-    {} as ICoordinates
-  );
+  const [coordinates, setCoordinates] = useState<google.maps.LatLng>();
+
+  const handleMapClick = (e: google.maps.MapMouseEvent) => {
+    if (!e.latLng) return;
+    setCoordinates(e.latLng);
+  };
 
   return (
     <Container>
-      <Map />
+      <MapProvider>
+        <Map onClick={handleMapClick}>
+          <Marker position={coordinates} />
+        </Map>
+      </MapProvider>
       <aside>
         <header>
           <div className="titlebox">
