@@ -90,7 +90,9 @@ export function MapPage() {
           <button type="button">
             <Link to="/map/register">Nova instituição</Link>
           </button>
-          <button type="button">Nova solicitação</button>
+          <button type="button">
+            <Link to="/map/register">Nova solicitação</Link>
+          </button>
         </section>
       </aside>
     </Container>
