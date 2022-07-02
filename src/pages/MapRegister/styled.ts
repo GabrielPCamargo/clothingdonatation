@@ -153,5 +153,6 @@ export const Form = styled.form`
     font-weight: 600;
     font-size: 14px;
     line-height: 100%;
+    cursor: pointer;
   }
 `;

@@ -17,6 +17,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
     if (userLS) {
       setUser(userLS);
+      axios.defaults.headers.common['Authorizaton'] = `Bearer ${userLS.token}`;
     }
 
     setLoading(false);
@@ -45,7 +46,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         })
       ).data as IUser;
 
+      console.log(user);
+
       setUser(user);
+      axios.defaults.headers.common['Authorization'] = `Bearer ${user.token}`;
       setUserLocalStorage(user);
       toast.success('Logado com sucesso!');
       callback();
@@ -58,6 +62,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const logOut = (callback: VoidFunction) => {
     setUser(null);
+    axios.defaults.headers.common['Authorization'] = '';
     setUserLocalStorage(null);
     callback();
   };
