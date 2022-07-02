@@ -17,7 +17,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
     if (userLS) {
       setUser(userLS);
-      axios.defaults.headers.common['Authorizaton'] = `Bearer ${userLS.token}`;
+      axios.defaults.headers.common['Authorization'] = `Bearer ${userLS.token}`;
     }
 
     setLoading(false);

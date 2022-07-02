@@ -6,6 +6,27 @@ export const Container = styled.div`
     height: 100vh;
   }
 
+  button {
+    display: block;
+    margin-top: 1rem !important;
+    padding: 0.5rem 1rem;
+    background: #0243ec;
+    margin: 0 auto;
+    border-radius: 6px;
+    color: #fff;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 100%;
+    text-align: center;
+    cursor: pointer;
+  }
+
+  h3 {
+    margin: 1rem;
+  }
+
   aside {
     position: absolute;
     top: 0;

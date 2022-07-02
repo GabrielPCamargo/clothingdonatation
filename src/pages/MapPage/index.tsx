@@ -1,34 +1,83 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Container } from './styled';
 import { Map } from '../../components/Map';
 import personMarker from '../../assets/icons/personMarker.svg';
-import { Link } from 'react-router-dom';
+import buildingMarker from '../../assets/icons/buildingMarker.svg';
+import shirtMarker from '../../assets/icons/shirtMarker.svg';
+import { Link, useNavigate } from 'react-router-dom';
 import { TitleBox } from '../../components/TitleBox';
 import { Marker } from '../../components/Marker';
 import { InfoWindow } from '../../components/InfoWindow';
 import { MapProvider } from '../../Contexts/MapProvider';
+import axios from '../../services/axios';
+import { toast } from 'react-toastify';
+
+interface IPoint {
+  _id: string;
+  name: string;
+  description: string;
+  coordinates: {
+    lat: number;
+    lng: number;
+  };
+  user: {
+    name: string;
+    email: string;
+  };
+  type: string;
+  number: string;
+}
 
 export function MapPage() {
+  const [points, setPoints] = useState<IPoint[] | undefined>();
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const response = await axios.get('/points');
+        setPoints(response.data);
+      } catch (err: any) {
+        toast.error(
+          'Erro ao buscar pontos no servidor: ' + err.response.data.error
+        );
+      }
+    };
+
+    getData();
+  }, []);
+
+  const handleInfoClick = (id: string) => {
+    navigate(`/points/${id}`);
+  };
+
   return (
     <Container>
       <MapProvider>
         <Map>
-          <Marker
-            icon={personMarker}
-            position={{ lat: -30.09733223303355, lng: -51.312168162811176 }}
-          >
-            <InfoWindow>
-              <h1>Testefdasfafakjflakfjlakjfalk</h1>
-            </InfoWindow>
-          </Marker>
-          <Marker
-            icon={personMarker}
-            position={{ lat: -30.118419410174702, lng: -51.35079197262563 }}
-          >
-            <InfoWindow>
-              <h3>Meu teste 123</h3>
-            </InfoWindow>
-          </Marker>
+          {points?.map((point) => (
+            <Marker
+              key={point._id}
+              icon={
+                point.type === 'institution'
+                  ? buildingMarker
+                  : point.type === 'request'
+                  ? personMarker
+                  : shirtMarker
+              }
+              position={point.coordinates}
+            >
+              <InfoWindow>
+                <div>
+                  <h3>{point.name}</h3>
+                  <button>
+                    <a href={`/points/${point._id}`}>Detalhes</a>
+                  </button>
+                </div>
+              </InfoWindow>
+            </Marker>
+          ))}
         </Map>
       </MapProvider>
       <aside>
