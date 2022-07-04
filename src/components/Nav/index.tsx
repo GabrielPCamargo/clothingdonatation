@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../../Contexts/AuthProvider/useAuth';
 import { Container } from './styled';
+import { useAuth } from '../../Contexts/AuthProvider/useAuth';
 
 export function Nav() {
   const { user, logOut } = useAuth();
@@ -19,7 +19,6 @@ export function Nav() {
         {!user ? (
           <>
             <li>
-              {' '}
               <Link to="/login">Login</Link>
             </li>
             <li>

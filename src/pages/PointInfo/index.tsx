@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 import { Container } from './styled';
 import { Map } from '../../components/Map';
 import personMarker from '../../assets/icons/personMarker.svg';
 import buildingMarker from '../../assets/icons/buildingMarker.svg';
 import shirtMarker from '../../assets/icons/shirtMarker.svg';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { TitleBox } from '../../components/TitleBox';
 import { Marker } from '../../components/Marker';
 import { FaArrowLeft } from 'react-icons/fa';
 import { MapProvider } from '../../Contexts/MapProvider';
 import axios from '../../services/axios';
-import { toast } from 'react-toastify';
 
 interface IPoint {
   _id: string;
@@ -32,8 +32,6 @@ export function PointInfo() {
   const [point, setPoint] = useState<IPoint | undefined>();
 
   const { id } = useParams();
-
-  const navigate = useNavigate();
 
   useEffect(() => {
     const getData = async () => {

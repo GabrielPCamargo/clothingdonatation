@@ -1,8 +1,8 @@
 import React, { createContext, useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 import { AuthContextType, IUser, IUserLogin } from './types';
 import { getUserLocalStorage, setUserLocalStorage } from './utils';
 import axios from '../../services/axios';
-import { toast } from 'react-toastify';
 
 export const AuthContext = createContext<AuthContextType>(
   {} as AuthContextType
@@ -45,8 +45,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           password: userProps.password,
         })
       ).data as IUser;
-
-      console.log(user);
 
       setUser(user);
       axios.defaults.headers.common['Authorization'] = `Bearer ${user.token}`;

@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import InputMask from 'react-input-mask';
 import { Container, Form } from './styled';
 import { Map } from '../../components/Map';
 import { Marker } from '../../components/Marker';
 import { MapProvider } from '../../Contexts/MapProvider';
 import { TitleBox } from '../../components/TitleBox';
-import { toast } from 'react-toastify';
 import axios from '../../services/axios';
-import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../Contexts/AuthProvider/useAuth';
 
 export function MapRegister() {

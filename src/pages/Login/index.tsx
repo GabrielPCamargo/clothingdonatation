@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import isEmail from 'validator/lib/isEmail';
 import { Container, Form } from './styled';
 import { useAuth } from '../../Contexts/AuthProvider/useAuth';
-import { useLocation, useNavigate } from 'react-router-dom';
 import { TitleBox } from '../../components/TitleBox';
-import isEmail from 'validator/lib/isEmail';
-import { toast } from 'react-toastify';
 
 interface Location {
   state: {

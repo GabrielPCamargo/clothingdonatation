@@ -1,9 +1,7 @@
 import React from 'react';
-import { useAuth } from '../../Contexts/AuthProvider/useAuth';
 import { Link } from 'react-router-dom';
-import '../../assets/css/styles.css';
-import map from '../../assets/img/map.png';
 import { Container, IndexSection } from './styled';
+import map from '../../assets/img/map.png';
 import { TitleBox } from '../../components/TitleBox';
 import { Nav } from '../../components/Nav';
 

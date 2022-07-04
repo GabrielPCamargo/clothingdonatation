@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import clothes from '../../assets/img/clothes.png';
 import { Container } from './styled';
+import clothes from '../../assets/img/clothes.png';
 
 interface Props {
   justifyContent?: string;

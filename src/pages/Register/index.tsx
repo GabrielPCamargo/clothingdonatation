@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import isEmail from 'validator/lib/isEmail';
 import { toast } from 'react-toastify';
 import { TitleBox } from '../../components/TitleBox';
 import { useAuth } from '../../Contexts/AuthProvider/useAuth';
 import { Container, Form } from './styled';
-import isEmail from 'validator/lib/isEmail';
 import axios from '../../services/axios';
 
 export function Register() {

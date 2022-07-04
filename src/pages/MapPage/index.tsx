@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { Container } from './styled';
 import { Map } from '../../components/Map';
 import personMarker from '../../assets/icons/personMarker.svg';
 import buildingMarker from '../../assets/icons/buildingMarker.svg';
 import shirtMarker from '../../assets/icons/shirtMarker.svg';
-import { Link, useNavigate } from 'react-router-dom';
 import { TitleBox } from '../../components/TitleBox';
 import { Marker } from '../../components/Marker';
 import { InfoWindow } from '../../components/InfoWindow';
 import { MapProvider } from '../../Contexts/MapProvider';
 import axios from '../../services/axios';
-import { toast } from 'react-toastify';
 
 interface IPoint {
   _id: string;
@@ -31,8 +31,6 @@ interface IPoint {
 export function MapPage() {
   const [points, setPoints] = useState<IPoint[] | undefined>();
 
-  const navigate = useNavigate();
-
   useEffect(() => {
     const getData = async () => {
       try {
@@ -47,10 +45,6 @@ export function MapPage() {
 
     getData();
   }, []);
-
-  const handleInfoClick = (id: string) => {
-    navigate(`/points/${id}`);
-  };
 
   return (
     <Container>
